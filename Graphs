@@ -1,0 +1,46 @@
+
+package graphs;
+class MST{
+   int V=9;
+   // kenarların arasında en küçük ağırlıklı kenarı bulan yardımcı method
+   int minADugum(int[] agirlik,boolean mstEklenen[]){
+       int min=Integer.MAX_VALUE;
+       int min_index=-1; // -1. indis olmadığı için değişmediği zaman hata versin 
+       for (int v = 0; v < V; v++) {
+           if (mstEklenen[v]==false && agirlik[v]<min) {
+               min=agirlik[v]; //gittiğimiz kenarın ağırlığı
+               min_index=v; //gideceğimiz düğüm
+           }
+       }return min_index;
+   }
+   void printMST(int [][] graf){
+       int []MSTdizi=new int [V];
+       int []agirlik=new int [V];
+       
+       boolean []mstEklenen=new boolean[V];
+       for (int i = 0; i < V; i++) {
+           agirlik[i]=Integer.MAX_VALUE;  // başlangıçta hepsinin büyük old varsayılıyo
+           mstEklenen[i]=false; //hiçbiri ziyaret edilmediği için başlangıçta hepsi false yapılır
+       }
+        agirlik[0]=0;
+        MSTdizi[0]=-1;
+        for (int c = 0; c <V-1; c++) {
+           int u =minADugum(agirlik,mstEklenen);
+           mstEklenen[u]=true;
+            for (int v = 0; v < V; v++) {                                          //u düğümünün bağlantılarını gezinicez
+                if (graf[u][v]!=0 && mstEklenen[v]==false && graf[u][v]<agirlik[v]) { // 1.şart 0 olmamasılazım bağlantı yok demek 
+                   MSTdizi[v]=u;                                                       //  2. şart gezinmemiş olması lazım
+                   agirlik[v]=graf[u][v];                                                           //3. ağırlıktan küçük mü
+                    
+                }
+            }printMST(MSTdizi,graf);
+       }
+    }
+   void printMST(int[] MSTdizi,int[][] graf ){
+       System.out.println("Kenar/T Agirlik");
+       for (int i = 1; i < V; i++) {
+           System.out.println(MSTdizi[i]+"-"+i+"/t"+graf[i][MSTdizi[i]]);
+       }
+   }
+
+}
