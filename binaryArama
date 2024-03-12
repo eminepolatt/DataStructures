@@ -1,0 +1,32 @@
+package arama_siralamaalgolari;
+
+public class binaryArama {
+
+public static int BinarySearch(int dizi[],int aranan){
+int l=0;
+int r=dizi.length-1;
+while(l<=r){
+int m=l+(r-l)/2;
+if (dizi[m]==aranan) {
+   return m;
+
+}
+if (dizi[m]<aranan) {
+   l=m+1;
+}else 
+        r=m-1;
+}
+    return -1;
+}
+public static void main(String[] args) {
+           int dizi[] = {2, 3, 6, 10, 60};
+       int aranan=10;
+       int sonuc=BinarySearch(dizi,aranan);
+        if (sonuc==-1) {
+            System.out.println("elemanı bulamadı");
+        }else
+            System.out.println("eleman"+sonuc+".indexte");
+   
+    }
+ 
+}
