@@ -1,0 +1,158 @@
+package tekYonBaglisteElemanSil;
+public class ana {
+       public static void main(String[] args) {
+        dugum sayi1 = new dugum(14);
+        dugum sayi2 = new dugum(22);
+        dugum sayi3 = new dugum(20);
+        dugum sayi4 = new dugum(2);
+
+        listeYapisi list = new listeYapisi();
+
+        sayi1.next = sayi2;
+        sayi2.next = sayi3;
+        sayi3.next = sayi4;
+        sayi4.next = null;
+
+        dugum bas = sayi1;
+
+        while (bas != null) {
+            System.out.println(bas.sayi);
+            bas = bas.next;
+        }
+
+        list.bastanSil();
+        list.sondanSil();
+        list.aradanSil(0);
+        list.yazdir();
+
+    }
+}
+
+class dugum {
+
+    int sayi;
+    dugum next;
+    dugum bas;
+
+    dugum(int sayi) {
+        this.sayi = sayi;
+        next = null;
+    }
+
+}
+
+public class listeYapisi {
+
+    dugum bas, son;
+
+    public static void main(String[] args) {
+        dugum sayi1 = new dugum(14);
+        dugum sayi2 = new dugum(22);
+        dugum sayi3 = new dugum(20);
+        dugum sayi4 = new dugum(2);
+
+        listeYapisi list = new listeYapisi();
+
+        sayi1.next = sayi2;
+        sayi2.next = sayi3;
+        sayi3.next = sayi4;
+        sayi4.next = null;
+
+        dugum bas = sayi1;
+
+        while (bas != null) {
+            System.out.println(bas.sayi);
+            bas = bas.next;
+        }
+
+        list.bastanSil();
+        list.sondanSil();
+        list.aradanSil(0);
+        list.yazdir();
+
+    }
+
+    public void bastanSil() {
+
+        if (bas == null) {
+            System.out.println(" liste boş ");
+        } else if (bas.next == null) {
+            bas = null;
+            System.out.println("listede kalan son eleman da silindi");
+        } else {
+            bas = bas.next;
+            System.out.println("baştaki eleman silindi");
+        }
+    }
+
+    public void aradanSil(int indis) {
+        if (bas == null) {
+            System.out.println("liste boş");
+        } else if (bas.next != null && indis == 0) {
+            bas = bas.next;
+            System.out.println("baştaki eleman  silindi");
+        } else {
+            int i = 0;
+            dugum tmp = bas;
+            dugum tmp2 = bas;
+            while (tmp != null) {
+                i++;
+                tmp2 = tmp;
+                tmp = tmp.next;
+
+            }
+            if (i == indis) {
+                tmp2.next = null;
+                son = tmp2;
+                System.out.println("listedeki son ");
+
+            } else {
+                tmp = bas;
+                tmp2 = bas;
+                int j = 0;
+                while (j != indis) {
+                    tmp2 = tmp;
+                    tmp = tmp.next;
+                    j++;
+
+                }
+                tmp2.next = tmp.next;
+                System.out.println("afradaki nesne silindi");
+            }
+        }
+    }
+
+    public void sondanSil() {
+        if (bas == null) {
+            System.out.println("liste boş");
+        } else if (bas.next == null) {
+            bas = null;
+            son = null;
+            System.out.println("listede kalan son eleman da silinir");
+        } else {
+            dugum tmp = bas;
+            dugum tmp2 = bas;
+            while (tmp.next != null) {
+                tmp2 = tmp;
+                tmp = tmp.next;
+            }
+            tmp2.next = null;
+            son = tmp2;
+            System.out.println("sondan eleman silindi");
+        }
+    }
+
+    public void yazdir() {
+        if (bas == null) {
+            System.out.println("liste boş");
+        } else {
+            dugum tmp = bas;
+            System.out.println("bas->");
+            while (tmp != null) {
+                System.out.println(tmp.sayi);
+                tmp = tmp.next;
+            }
+            System.out.println("son");
+        }
+    }
+}
