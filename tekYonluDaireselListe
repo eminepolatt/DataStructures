@@ -139,7 +139,26 @@ public void sondansil(){
 
    
  
+public class uygulama {
 
+    public static void main(String[] args) {
+        tekYonDaireselyapısı tyList = new tekYonDaireselyapısı();
+
+        tyList.basaEkle(10);
+        tyList.basaEkle(30);
+        tyList.basaEkle(40);
+        tyList.basaEkle(50);
+        tyList.basaEkle(60);
+
+        
+        
+        tyList.bastansil();
+     
+        
+        
+        tyList.yazdir();
+    }
+}
    
 
     
