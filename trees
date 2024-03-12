@@ -1,0 +1,156 @@
+package agaclar;
+
+public class Agac {
+
+    Node kok;
+
+    Agac() {
+        kok = null;
+    }
+
+    void Ekle(Node yeni) {
+        Node yer = null;
+        Node x = kok;
+        while (x != null) {
+            yer = x;
+            if (yeni.icerik < x.icerik) {
+                x = x.sol;
+            } else {
+                x = x.sag;
+            }
+        }
+        if (yer == null) {//kontrol etmezsek ilk durum her zaman hata verir
+            kok = yeni;
+        } else if (yeni.icerik < yer.icerik) {
+            yer.sol = yeni;
+        } else {
+            yer.sag = yeni;
+        }
+    }
+
+    void preorder(Node node) {  //kök sol sağ
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.icerik + " ");//kökü yazdırdık
+        preorder(node.sol);
+        preorder(node.sag);
+    }
+
+    void inorder(Node node) { //sol kök sağ
+        if (node == null) {
+            return;
+        }
+        inorder(node.sol);
+        System.out.print(node.icerik + " "); //kök
+        inorder(node.sag);
+    }
+
+    void postorder(Node node) { // sol sağ kök
+        if (node == null) {
+            return;
+        }
+        postorder(node.sol);
+        postorder(node.sag);
+        System.out.print(node.icerik + " ");//kok 
+
+    }
+
+    Node minBul() {
+        Node sonuc = kok;
+        while (sonuc.sol != null) {
+            sonuc = sonuc.sol;
+
+        }
+        return sonuc;
+    }
+
+    Node maxBul() {
+        Node sonuc = kok;
+        while (sonuc.sag != null) {
+            sonuc = sonuc.sag;
+
+        }
+        return sonuc;
+    }
+
+    Node agacAra(int aranan) {
+        Node d = kok;
+        aranan=5;
+        while (d != null) {
+            if (d.icerik == aranan) {
+                System.out.println("Aranan eleman bulundu");
+                return d;
+            } else if (d.icerik >aranan) {
+                d = d.sol;
+            } else {
+                d = d.sag;
+            }
+        }
+        System.out.println("Eleman BULUNAMADI");
+        return null;
+    }
+
+    public boolean yaprakSil(int key) {
+        Node current = kok;
+        Node parent = kok;
+        boolean SolDugum = true;
+        while (current.icerik != key) {
+            parent = current;
+            if (key < current.icerik) {
+                SolDugum = true;
+                current = current.sol;
+            } else {
+                SolDugum = false;
+                current = current.sag;
+            }
+            if (current == null) {
+                return false;
+
+            }
+
+        }
+        if (current.sol == null && current.sag == null) {
+            if (current == kok) {
+                kok = null;
+            } else if (SolDugum) {
+                parent.sol = null;
+            } else {
+                parent.sag = null;
+            }
+            return true;
+        } else {
+            return false;
+  
+      }
+    }
+   
+    
+    // seviyesine göre sırayla yazdırma?
+
+    public static void main(String[] args) {
+        Agac a = new Agac();
+        a.Ekle(new Node(8));
+        a.Ekle(new Node(5));
+        a.Ekle(new Node(12));
+        a.Ekle(new Node(13));
+
+        System.out.print("preorder = ");
+        a.preorder(a.kok);
+        System.out.println(" ");
+        System.out.print("inorder  = ");
+        a.inorder(a.kok);
+        System.out.println(" ");
+        System.out.print("postorder= ");
+        a.postorder(a.kok);
+        System.out.println(" ");
+        System.out.println("en küçük=" + a.minBul().icerik);
+        System.out.println(" ");
+        System.out.println("en büyük=" + a.maxBul().icerik);
+
+        a.agacAra(7);
+        System.out.println(" ");
+        System.out.println(a.yaprakSil(5));
+    }
+
+}
