@@ -1,0 +1,55 @@
+
+package bagliKuyruk;
+ class dugum {
+     int icerik;
+     dugum ileri;
+     public dugum (int icerik){
+          this.icerik=icerik;
+          ileri=null;
+     }
+ }
+class bkuyruk{
+    dugum bas,son;
+    bkuyruk(){
+        bas=null;
+        son=null;
+    }boolean bosMu(){
+        return bas==null;
+        
+    }void push(dugum yeni){
+         if (!bosMu()) {
+             son.ileri=yeni;
+             son=yeni;
+         }
+         else{
+             bas=yeni;
+             son=yeni;
+         }
+    }
+    dugum pop(){
+        dugum sonuc=bas;
+        if (!bosMu()) {
+            bas=bas.ileri;
+            if (bas==null) {
+                son=null;
+            }
+           
+        }  return sonuc; 
+    }
+}
+public class BagliKuyruk {
+    public static void main(String[] args) {
+        bkuyruk k=new bkuyruk();
+        k.push(new dugum(5));
+        k.push(new dugum(13));
+        System.out.print(k.pop().icerik);
+        k.push(new dugum(7));
+        k.push(new dugum(23));
+        k.push(new dugum(35));
+        k.push(new dugum(44));
+        while(!k.bosMu()){
+            dugum s=k.pop();
+            System.out.print("-->"+s.icerik);
+        }
+    }
+}
