@@ -1,0 +1,112 @@
+
+package bliste;
+
+class Eleman{
+    int icerik ;
+    Eleman ileri;
+    
+
+public Eleman (int icerik){
+    this.icerik=icerik;
+    ileri=null;
+    
+}}
+public class BListe{
+    Eleman bas,son;
+    public BListe(){
+        bas=null;
+        son=null;
+        
+    }
+    public void basaEkle(Eleman yeni){
+        if (son==null) {
+            bas=yeni;
+            son=yeni;
+            
+        }else{
+             yeni.ileri=bas;
+             bas=yeni;
+             
+                     
+        }   
+    }
+    public void sonaEkle(Eleman yeni){
+        if (bas==null) {
+            son=yeni;
+            bas=yeni;
+        }
+        else{
+            son.ileri=yeni;
+            son=yeni;
+            
+        }
+    }
+    public Eleman bastanSil(){
+        Eleman tmp=bas;
+        if (bas!=null) {
+            bas=bas.ileri;
+            
+        }
+        else{
+            son=null;
+            return null;
+        }
+        return tmp;
+    }
+    public Eleman sondanSil(){
+        Eleman tmp=bas, once=null, silinen=son;
+        while (tmp!=null)  {
+            once=tmp;
+            tmp=tmp.ileri;
+            
+        }
+        if (once==null) {
+            bas=null;
+             son=null;
+            return null;
+            
+        }
+        else{
+            once.ileri=null;
+            son=once;
+            return silinen;
+        }
+    }
+    public String listele(){
+        String s="";
+        Eleman tmp=bas;
+        while(tmp!=null){
+            s=s+tmp.icerik+"--";
+            tmp=tmp.ileri;
+            
+        }
+        return s;
+        
+        
+    }
+}
+
+
+package bliste;
+
+public class Test {
+    public static void main(String[] args) {
+        BListe L=new BListe();
+        Eleman yeni=new Eleman(7);
+        L.basaEkle(yeni);
+        yeni=new Eleman(8);
+        L.basaEkle(yeni);
+         yeni=new Eleman(9);
+        L.basaEkle(yeni);
+        String s=L.listele();
+        System.out.println("s="+s);
+        Eleman sonuc=L.bastanSil();
+        if (sonuc!=null) {
+            System.out.println(L.listele());
+        }
+        else{
+            System.out.println("Liste boş");
+            
+        }
+    }
+}
