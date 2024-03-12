@@ -1,0 +1,25 @@
+
+package arama_siralamaalgolari;
+
+
+public class lineerArama {
+
+    public static int Lineersearch(int dizi[],int N,int aranan){
+        for (int i = 0; i < N; i++) {
+            if (dizi[i]==aranan) {
+                return i;
+            }
+        }return -1;
+    }
+   
+    public static void main(String[] args) {
+       int dizi[]={2,3,6,10,40};
+       int aranan=6;
+       int sonuc=Lineersearch(dizi,dizi.length,aranan);
+        if (sonuc==-1) {
+            System.out.println("elemanı bulamadı");
+        }else
+            System.out.println("eleman"+sonuc+".indexte");
+    }
+    
+}
