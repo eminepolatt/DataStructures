@@ -1,0 +1,124 @@
+
+class Dugum {
+
+    int data;
+    Dugum next;
+}
+
+public class tekYonluListeYapisi {
+
+    Dugum bas = null;
+    Dugum son = null;
+
+    public void basaEkle(int x) {
+        Dugum eleman = new Dugum();
+        eleman.data = x;
+
+        if (bas == null) {
+            eleman.next = null;
+            bas = eleman;
+            son = eleman;
+            System.out.println("liste yyapisi oluşturuldu ilk eleman eklendi");
+        } else {
+            eleman.next = bas;
+            bas = eleman;
+            System.out.println("Başa eleman eklendi");
+        }
+    }
+
+    public void arayaEkle(int indis, int x) {
+        Dugum eleman = new Dugum();
+        eleman.data = x;
+      if (bas == null && indis == 0) {
+            eleman.next = null;
+            bas = eleman;
+            son = eleman;
+            System.out.println("liste yapısı oluşturuldu, ilk eleman eklendi");
+        } 
+        else if (bas != null && indis == 0) {
+            eleman.next = bas;
+            bas = eleman;
+            System.out.println(indis + ". indise yeni eleman eklendi");
+        } else {
+            int n = 0;
+            Dugum temp = bas;
+            Dugum temp2 = bas;
+            while (temp.next != null) {
+                n++;
+                temp2 = temp;
+                temp = temp.next;
+            }
+            if (n == indis) {
+                temp2.next = eleman;
+                eleman.next = temp;
+                System.out.println("eleman eklendi");
+            } else {
+                temp = bas;
+                temp2 = bas;
+                int i = 0;
+                while (i < indis) {
+                    temp2 = temp;
+                    temp = temp.next;
+                    i++;
+                }
+                temp2.next = eleman;
+                eleman.next = temp;
+                System.out.println(indis + ". sıraya yeni eleman eklendi");
+            }
+        }
+
+    }
+
+    public void sonaEkle(int x) {
+        Dugum eleman = new Dugum();
+        eleman.data = x;
+
+        if (bas == null) {
+            eleman.next = null;
+            bas = eleman;
+            son = eleman;
+            System.out.println("liste yapisi oluşturuldu ilk eleman eklendi");
+        } else {
+            eleman.next = null;
+            son.next = eleman;  //ekleme yaptık
+            son = eleman;       //ismi güncelledik
+
+        }
+    }
+
+    public void yazdir() {
+        if (bas == null) {
+            System.out.println("liste yapisi bos!!!");
+        } else {
+            Dugum temp = bas;
+            System.out.println("bas->");
+            while (temp != null) {
+
+                System.out.println(temp.data + "->");
+                temp = temp.next;
+            }
+            System.out.println("son.");
+        }
+        
+    }
+ public static void main(String[] args) {
+        tekYonluListeYapisi tekYonList = new tekYonluListeYapisi();
+        tekYonList.basaEkle(10);
+        tekYonList.sonaEkle(20);
+        tekYonList.basaEkle(5);
+        tekYonList.sonaEkle(30);
+        tekYonList.sonaEkle(3);
+        tekYonList.sonaEkle(55);
+        /*  System.out.println("baştaki düğümün elemanı:" + tekYonList.bas.data);
+        System.out.println("sondaki düğümün elemanı:" + tekYonList.son.data);
+         */ //bunun yerine
+
+        tekYonList.arayaEkle(3, 25);
+        tekYonList.arayaEkle(6, 50);
+        tekYonList.arayaEkle(0, 3);
+
+        tekYonList.yazdir();
+    }
+}
+
+}
