@@ -1,0 +1,93 @@
+package fınalhazırlık;
+
+class Node {
+
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class LinkedList {
+
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public LinkedList birlestir(LinkedList L1, LinkedList L2) {
+        LinkedList birlesmisListe = new LinkedList();
+        Node current1 = L1.head;
+        Node current2 = L2.head;
+
+        while (current1 != null && current2 != null) {
+            if (current1.data < current2.data) {
+                birlesmisListe.ekle(current1.data);
+                current1 = current1.next;
+            } else {
+                birlesmisListe.ekle(current2.data);
+                current2 = current2.next;
+            }
+        }
+
+       
+
+        return birlesmisListe;
+    }
+
+    public void ekle(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else if (data < head.data) {
+            newNode.next = head;
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null && current.next.data < data) {
+                current = current.next;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    public void yazdir() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        LinkedList L1 = new LinkedList();
+        L1.ekle(1);
+        L1.ekle(3);
+        L1.ekle(4);
+        L1.ekle(6);
+
+        LinkedList L2 = new LinkedList();
+        L2.ekle(0);
+        L2.ekle(2);
+        L2.ekle(5);
+        L2.ekle(7);
+
+        LinkedList birlesmisListe = new LinkedList();
+        birlesmisListe = birlesmisListe.birlestir(L1, L2);
+
+        System.out.println("L1:");
+        L1.yazdir();
+
+        System.out.println("L2:");
+        L2.yazdir();
+
+        System.out.println("Birleştirilmiş Liste:");
+        birlesmisListe.yazdir();
+    }
+}
