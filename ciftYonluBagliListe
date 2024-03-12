@@ -1,0 +1,114 @@
+
+    
+package ciftYonluBagliListe;
+
+class CiftEleman {
+    int icerik;
+    CiftEleman ileri;
+    CiftEleman geri;
+    CiftEleman(int icerik){
+        this.icerik=icerik;
+        ileri=null;
+        geri=null;
+    }
+}
+class Cliste{
+    CiftEleman bas;
+    CiftEleman son;
+    public  Cliste(){  //kurucu method
+        bas=null;
+        son=null;
+        
+    }
+    void listeBasinaEkleme(CiftEleman yeni){
+        if (son==null) {
+            son=yeni;
+             }else {
+            bas.geri=yeni;
+        }
+        yeni.ileri=bas;
+        bas=yeni;
+    }
+    void listeyeEkle(CiftEleman yeni){
+        if (bas==null) {
+            bas=yeni;
+            son=yeni;
+        }else{
+            son.ileri=yeni;
+            yeni.geri=son;
+            son=yeni;
+        }
+    }
+    void ListeBasiSil(){
+        bas=bas.ileri;
+        if (bas==null) {
+            son=null;
+            }else{
+            bas.geri=null;
+        }
+    }
+    public int DugumSayisi(){
+        CiftEleman cn=bas;
+        int count=0;
+        while(cn!=null){
+            count++;
+            cn=cn.ileri;
+        }return count;
+    }
+    public void dugumleriGez(){
+CiftEleman tmp=bas;
+   while(tmp!=null){
+       System.out.println("Düğümün içeriği:"+tmp.icerik);
+       tmp=tmp.ileri;
+}
+}
+    public boolean elemanSil(int x ){
+       CiftEleman cn=bas;
+       while(cn.icerik!=x) { //cn nerde diye arıyor
+            cn=cn.ileri;
+       }
+        if (cn!=null) {
+            if (cn.geri==null) {
+                bas=cn.ileri;
+                if (bas==null) {
+                    bas.geri=null;
+                }
+            }else if(cn.ileri==null){
+                son=cn.geri;
+                if (bas!=null) {
+                    son.ileri=null;
+                }
+            }else{
+                cn.geri.ileri=cn.ileri;
+                cn.ileri=cn.geri;
+            }
+        }
+      return cn!=null;  
+}}
+
+public class ciftyonluBagliliste {
+    public static void main(String[] args) {
+        Cliste c1=new Cliste();
+        c1.listeyeEkle(new CiftEleman(5));
+        c1.listeBasinaEkleme(new CiftEleman(3));
+        c1.listeBasinaEkleme(new CiftEleman(7));
+        c1.listeBasinaEkleme(new CiftEleman(13));
+        c1.listeBasinaEkleme(new CiftEleman(15));
+        c1.dugumleriGez();
+        System.out.println("-----------");
+        System.out.println("Düğüm sayısı:"+c1.DugumSayisi());
+        c1.ListeBasiSil();
+        
+        c1.dugumleriGez();
+        System.out.println("-----------");
+        System.out.println("Düğüm sayısı:"+c1.DugumSayisi());
+        c1.elemanSil(13);
+        System.out.println("-----------");
+        System.out.println("Düğüm sayısı:"+c1.DugumSayisi());
+        c1.dugumleriGez();
+        
+    }
+}
+
+
+
