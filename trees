@@ -154,3 +154,22 @@ public class Agac {
     }
 
 }
+
+
+
+
+package agaclar;
+
+
+public class Node {
+    int icerik;
+    Node  sag ;
+    Node sol;
+    Node(int icerik){
+        this.icerik=icerik;
+        sag=null;
+        sol=null;
+        
+    }
+}
+
