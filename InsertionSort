@@ -1,0 +1,58 @@
+package arama_siralamaalgolari;
+//kendi örneklerim
+//insertion sort Ardışıl çalışır
+class Node {
+    int element;
+    Node next;
+
+    public Node(int element) {
+        this.element = element;
+        this.next = null;
+    }
+}
+
+public class InsertionSort {
+
+    public static Node insertionSort(Node head) {
+        Node sortedList = null;
+        Node current = head;
+
+        while (current != null) {
+            Node nextNode = current.next;
+            sortedList = sortedInsert(sortedList, current);
+            current = nextNode;
+        }
+        return sortedList;
+    }
+
+    private static Node sortedInsert(Node sortedList, Node newNode) {
+        if (sortedList == null || sortedList.element >= newNode.element) {
+            newNode.next = sortedList;
+            return newNode;
+        } else {
+            Node current = sortedList;
+            while (current.next != null && current.next.element < newNode.element) {
+                current = current.next;
+            }
+            newNode.next = current.next;
+            current.next = newNode;
+            return sortedList;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Örnek kullanım için bir liste oluşturalım
+        Node head = new Node(3);
+        head.next = new Node(1);
+        head.next.next = new Node(4);
+        head.next.next.next = new Node(2);
+
+        Node sortedList = insertionSort(head);
+
+        // Sıralanmış listeyi yazdıralım
+        while (sortedList != null) {
+            System.out.print(sortedList.element + " ");
+            sortedList = sortedList.next;
+        }
+    }
+}
