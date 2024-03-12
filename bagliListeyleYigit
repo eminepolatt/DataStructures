@@ -1,0 +1,49 @@
+
+package yigitlar;
+class dugum{
+    int icerik;
+    dugum ileri ;
+    public dugum(int icerik){
+        this.icerik=icerik;
+        ileri=null;
+    }}
+    class yigitB{
+        dugum ust;
+       public yigitB(){
+           ust=null;
+       }
+       boolean bosMu(){
+           return ust==null;
+       }
+       void push(dugum d){
+           if (bosMu()) {
+               ust=d;
+           }else{
+               d.ileri=ust;
+               ust=d;
+           }
+       }
+       dugum pop(){
+           dugum e=ust;
+           if (!bosMu()) {
+               ust=ust.ileri;
+               
+           }return e;
+       }
+   
+    }
+
+public class bagliListeyleYigit {
+    public static void main(String[] args) {
+        yigitB yb=new yigitB();
+        yb.push(new dugum (10));
+        yb.push(new dugum (20));
+        System.out.println(yb.pop().icerik);
+        yb.push(new dugum(8));
+        yb.push(new dugum(13));
+        yb.push(new dugum(7));
+        while(!yb.bosMu()){
+            System.out.println(yb.pop().icerik);
+        }
+    }
+}
