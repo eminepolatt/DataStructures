@@ -1,0 +1,53 @@
+
+package kuyruklar;
+class eleman{
+    int icerik;
+    public eleman(int icerik){
+        this.icerik=icerik;
+    }
+}
+class kuyruk{
+    eleman [] dizi;
+    int bas,son;
+    int N;
+    public kuyruk (int N){
+        dizi=new eleman[N];
+        this.N=N;
+        bas=0;
+        son=0;
+        
+    } 
+    boolean doluMu(){
+        return bas==(son+1)%N;//indisi sıfırlayıp başa dönmek için N e böleriz
+     }boolean bosMu (){
+         return bas==son;
+     }
+     void ekle(eleman e){
+         if (!doluMu()) {
+             dizi[son]=e;
+             son=(son+1)%N;
+         }
+     }
+     eleman sil(){
+         eleman sonuc;
+         if (!bosMu()) {
+             sonuc=dizi[bas];
+             bas=(bas+1)%N;
+             return sonuc;
+         }return null;
+     }
+}
+public class Kuyruklar {
+
+    public static void main(String[] args) {
+         kuyruk k=new kuyruk(10);
+         k.ekle(new eleman (5));
+         k.ekle(new eleman (8));
+         k.ekle(new eleman (13));
+         while(!k.bosMu()){
+             eleman s=k.sil();
+             System.out.println(s.icerik);
+         }
+    }
+    
+}
