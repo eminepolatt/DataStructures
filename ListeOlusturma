@@ -1,0 +1,35 @@
+
+package listeOlusturma;
+
+class sinif {
+   int sayi;
+   
+   sinif next; //(gösterici) bi sonraki düğümü ya da sınıfın adresini tutabilir
+   
+}
+
+public class Ana {
+    public static void main(String[] args) {
+        sinif A =new sinif(); // bellekte düğüm oluşturduk
+        sinif B =new sinif();
+        sinif C =new sinif();
+        A.sayi=11; //düğümlere değerlerini atıyoruz
+        B.sayi=22;
+        C.sayi=33;
+        
+        A.next=B;   //A düğümünü B düğümüne bağladık  
+        B.next=C;
+        C.next=null;
+        
+        sinif temp=A;   //düğümler arasında gezmek için tutulan değişken
+       
+        
+        while(temp!=null){   //travels :düğümler üzerinde gezdik
+            System.out.println(temp.sayi); //ekrana yazdırdık
+            temp=temp.next;  //bir sonraki düğüme geçer
+            
+        }
+        
+        
+                }
+}
