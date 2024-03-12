@@ -1,0 +1,34 @@
+package arama_siralamaalgolari;
+//selection sort ardışıl çalışır
+public class SelectionSort {
+
+    public static void Selectionsort(int dizi[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            int min_index = i;
+            for (int j = i + 1; j < n; j++) {  // Dizinin kalan kısmı boyunca minimum elemanı bulma
+                if (dizi[j] < dizi[min_index]) {
+                    min_index = j;
+                }}
+                int tmp = dizi[min_index];  //Minimum elemanı bulduktan sonra swap işlemi 
+                dizi[min_index] = dizi[i];
+                dizi[i] = tmp;
+            
+        }
+    }
+
+    public static void yazdirDizi(int dizi[], int size) {
+        for (int i = 0; i < size; i++) {
+            System.out.print(dizi[i] + " ");
+        }
+        System.out.println(" ");
+    }
+
+    public static void main(String[] args) {
+        int dizi[] = {46, 64, 12, 0, 1, 3, 2};
+         System.out.println("Dizinin sıralanmamış hali:");
+         yazdirDizi(dizi, dizi.length);
+        Selectionsort(dizi, dizi.length);
+         System.out.println("Dizinin sıralanmış hali:");
+        yazdirDizi(dizi, dizi.length);
+    }
+}
