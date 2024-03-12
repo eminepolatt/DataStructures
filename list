@@ -1,0 +1,80 @@
+
+package fınalhazırlık;
+//
+public class liste {
+
+    public static void main(String[] args) {
+    linkedlist l1=new linkedlist();
+    linkedlist l2=new linkedlist();
+    l1.insert(1); l1.insert(3);l1.insert(4);l1.insert(6);
+    l1.print();
+    l2.insert(0);l2.insert(2);l2.insert(5); l2.insert(7);
+    l2.print();
+    linkedlist l3=new linkedlist();
+    l3.birlestir(l1,l2);
+
+
+    }
+
+}
+    class node{
+    int data;
+    node next;
+    node prev;
+
+    public node(int data) {
+        this.data = data;
+        next=null;
+        prev=null;
+    }
+}
+    class linkedlist{
+    node head=null;
+    node tail=null;
+
+    void insert(int data){
+        node eleman=new node(data);
+        if (head ==null){
+            head=eleman;
+            tail=eleman;
+        }else{
+            tail.next = eleman;
+            eleman.prev = tail;
+            tail = eleman;
+        }
+    }
+    void print(){
+        node temp=head;
+        while (temp != null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+    }
+    void birlestir(linkedlist l1,linkedlist l2)
+    {
+        node temp1=l1.head;
+        node temp2=l2.head;
+        while (temp1 != null && temp2!=null)
+        {
+            if (temp1.data < temp2.data)
+            {
+                insert(temp1.data);
+                temp1=temp1.next;
+            }
+            else
+            {
+                insert(temp2.data);
+                temp2=temp2.next;
+            }
+        }
+        if (temp1 !=null)
+        {
+            insert(temp1.data);
+        }else {
+            insert(temp2.data);
+        }
+        print();
+    }
+}
+
