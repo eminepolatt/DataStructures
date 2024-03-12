@@ -1,32 +1,5 @@
 package tekYonBaglisteElemanSil;
-public class ana {
-       public static void main(String[] args) {
-        dugum sayi1 = new dugum(14);
-        dugum sayi2 = new dugum(22);
-        dugum sayi3 = new dugum(20);
-        dugum sayi4 = new dugum(2);
 
-        listeYapisi list = new listeYapisi();
-
-        sayi1.next = sayi2;
-        sayi2.next = sayi3;
-        sayi3.next = sayi4;
-        sayi4.next = null;
-
-        dugum bas = sayi1;
-
-        while (bas != null) {
-            System.out.println(bas.sayi);
-            bas = bas.next;
-        }
-
-        list.bastanSil();
-        list.sondanSil();
-        list.aradanSil(0);
-        list.yazdir();
-
-    }
-}
 
 class dugum {
 
