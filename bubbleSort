@@ -1,0 +1,38 @@
+
+package arama_siralamaalgolari;
+//bubble sort ardışıl çalışır
+public class bubbleSort {
+    public static void bubbleSort(int dizi[],int  n){
+        int temp;
+        boolean swapped;       // swap=değiştirmek
+        for (int i = 0; i< 10; i++) {
+            swapped=false;
+            for (int j = 0; j <n-i-1; j++) {
+                if (dizi[j]>dizi[j+1]) {        //Eğer şu anki eleman, bir sonraki elemandan büyükse swap yap(yer değiştirme işlemi)
+                    temp=dizi[j];               // swap arr[j] and arr[j+1]
+                    dizi[j]=dizi[j+1];
+                    dizi[j+1]=temp;
+                    swapped=true;
+                }
+            }
+            if (swapped==false) {
+                break;
+            }
+        }
+    }
+    public static void yazdirDizi(int dizi[],int size){
+        for (int i = 0; i < size; i++) {
+            System.out.print(dizi[i]+" ");
+        }
+        System.out.println(" ");
+    }
+    public static void main(String[] args) {
+         int dizi[] = {46,64,12,0,1,3,2};
+         bubbleSort(dizi,dizi.length);
+         yazdirDizi(dizi, dizi.length);
+       
+      
+   
+   
+    }
+}
